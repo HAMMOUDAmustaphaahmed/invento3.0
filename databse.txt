@@ -1,0 +1,135 @@
+mysql> DESCRIBE articles;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id_article      | int          | NO   | PRI | NULL    | auto_increment |
+| code_article    | varchar(20)  | NO   |     | NULL    |                |
+| libelle_article | varchar(255) | NO   |     | NULL    |                |
+| prix_achat      | float        | NO   |     | NULL    |                |
+| assignation     | varchar(255) | NO   |     | NULL    |                |
+| quantite        | int          | NO   |     | NULL    |                |
+| fournisseur     | varchar(255) | NO   |     | NULL    |                |
+| date            | datetime     | NO   |     | NULL    |                |
+| quantite_min    | int          | NO   |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+9 rows in set (0,05 sec)
+
+mysql> DESCRIBE demande_achat;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| code_demande    | int          | NO   | PRI | NULL    | auto_increment |
+| code_article    | varchar(50)  | NO   |     | NULL    |                |
+| libelle_article | varchar(20)  | NO   |     | NULL    |                |
+| quantite        | int          | NO   |     | NULL    |                |
+| prix_achat      | decimal(6,3) | YES  |     | NULL    |                |
+| assignation     | varchar(20)  | NO   |     | NULL    |                |
+| date            | datetime     | YES  |     | NULL    |                |
+| demandeur       | varchar(20)  | YES  |     | NULL    |                |
+| vers            | varchar(20)  | YES  |     | NULL    |                |
+| commande        | varchar(20)  | YES  |     | NULL    |                |
+| etat            | int          | NO   |     | NULL    |                |
+| reception       | int          | NO   |     | NULL    |                |
+| commentaire     | varchar(255) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+13 rows in set (0,00 sec)
+
+mysql> DESCRIBE demande_vente;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| code_demande    | int          | NO   | PRI | NULL    | auto_increment |
+| code_article    | varchar(50)  | NO   |     | NULL    |                |
+| libelle_article | varchar(20)  | NO   |     | NULL    |                |
+| quantite        | int          | NO   |     | NULL    |                |
+| prix_vente      | decimal(6,3) | YES  |     | NULL    |                |
+| assignation     | varchar(20)  | NO   |     | NULL    |                |
+| date            | datetime     | YES  |     | NULL    |                |
+| demandeur       | varchar(20)  | YES  |     | NULL    |                |
+| vers            | varchar(20)  | YES  |     | NULL    |                |
+| commande        | varchar(20)  | YES  |     | NULL    |                |
+| etat            | int          | NO   |     | NULL    |                |
+| reception       | int          | NO   |     | NULL    |                |
+| commentaire     | varchar(255) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+13 rows in set (0,01 sec)
+
+mysql> DESCRIBE fournisseur;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| id_fournisseur    | int          | NO   | PRI | NULL    | auto_increment |
+| nom_fournisseur   | varchar(255) | NO   |     | NULL    |                |
+| matricule_fiscale | varchar(50)  | YES  |     | NULL    |                |
+| adresse           | varchar(255) | YES  |     | NULL    |                |
+| telephone         | varchar(50)  | YES  |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
+5 rows in set (0,00 sec)
+
+mysql> DESCRIBE history;
++------------------------+--------------+------+-----+---------+----------------+
+| Field                  | Type         | Null | Key | Default | Extra          |
++------------------------+--------------+------+-----+---------+----------------+
+| id_history             | int          | NO   | PRI | NULL    | auto_increment |
+| code_demande           | int          | YES  |     | NULL    |                |
+| code_article           | varchar(50)  | YES  |     | NULL    |                |
+| libelle_article        | varchar(255) | YES  |     | NULL    |                |
+| quantite               | int          | YES  |     | NULL    |                |
+| prix                   | float        | YES  |     | NULL    |                |
+| fournisseur            | varchar(20)  | YES  |     | NULL    |                |
+| emplacement            | varchar(20)  | YES  |     | NULL    |                |
+| action                 | varchar(50)  | YES  |     | NULL    |                |
+| user                   | varchar(20)  | YES  |     | NULL    |                |
+| details                | varchar(255) | YES  |     | NULL    |                |
+| usine                  | varchar(20)  | YES  |     | NULL    |                |
+| date_action            | timestamp    | YES  |     | NULL    |                |
+| date_approuver_demande | timestamp    | YES  |     | NULL    |                |
+| date_reception         | timestamp    | YES  |     | NULL    |                |
++------------------------+--------------+------+-----+---------+----------------+
+15 rows in set (0,01 sec)
+
+mysql> DESCRIBE user;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| username    | varchar(20)  | NO   | UNI | NULL    |                |
+| password    | varchar(255) | NO   |     | NULL    |                |
+| emplacement | varchar(255) | NO   |     | NULL    |                |
+| role        | varchar(20)  | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+5 rows in set (0,01 sec)
+
+mysql> DESCRIBE usine;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id_usine  | int         | NO   | PRI | NULL    | auto_increment |
+| nom_usine | varchar(20) | NO   |     | NULL    |                |
+| region    | varchar(20) | NO   |     | NULL    |                |
+| adresse   | varchar(20) | YES  |     | NULL    |                |
+| latitude  | varchar(20) | YES  |     | NULL    |                |
+| longitude | varchar(20) | YES  |     | NULL    |                |
+| telephone | varchar(20) | YES  |     | NULL    |                |
+| etat      | varchar(20) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+8 rows in set (0,00 sec)
+
+mysql> DESCRIBE ventes;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id_vente        | int          | NO   | PRI | NULL    | auto_increment |
+| code_demande    | int          | YES  |     | NULL    |                |
+| code_article    | int          | YES  |     | NULL    |                |
+| libelle_article | varchar(20)  | YES  |     | NULL    |                |
+| quantite        | int          | YES  |     | NULL    |                |
+| prix_vente      | decimal(6,3) | YES  |     | NULL    |                |
+| assignation     | varchar(20)  | YES  |     | NULL    |                |
+| vers            | varchar(20)  | YES  |     | NULL    |                |
+| demandeur       | varchar(20)  | YES  |     | NULL    |                |
+| date            | datetime     | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+10 rows in set (0,00 sec)
+
+mysql> 

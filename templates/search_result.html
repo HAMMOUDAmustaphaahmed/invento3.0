@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de Recherche</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Résultats de Recherche</h2>
+
+        <!-- Résultats pour les Articles -->
+        {% if result1 %}
+        <h3>Articles</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Code Article</th>
+                    <th>Libellé</th>
+                    <th>Prix Achat</th>
+                    <th>Assignation</th>
+                    <th>Quantité</th>
+                    <th>Fournisseur</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in result1 %}
+                <tr>
+                    <td>{{ article.code_article }}</td>
+                    <td>{{ article.libelle_article }}</td>
+                    <td>{{ article.prix_achat }}</td>
+                    <td>{{ article.assignation }}</td>
+                    <td>{{ article.quantite }}</td>
+                    <td>{{ article.fournisseur }}</td>
+                    <td>{{ article.date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <!-- Résultats pour les Achats -->
+        {% if result2 %}
+        <h3>Achats</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Code Article</th>
+                    <th>Libellé</th>
+                    <th>Quantité</th>
+                    <th>Prix Achat</th>
+                    <th>Fournisseur</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for achat in result2 %}
+                <tr>
+                    <td>{{ achat.code_article }}</td>
+                    <td>{{ achat.libelle_article }}</td>
+                    <td>{{ achat.quantite }}</td>
+                    <td>{{ achat.prix_achat }}</td>
+                    <td>{{ achat.fournisseur }}</td>
+                    <td>{{ achat.date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <!-- Résultats pour les Ventes -->
+        {% if result3 %}
+        <h3>Ventes</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Code Article</th>
+                    <th>Libellé</th>
+                    <th>Quantité</th>
+                    <th>Prix Vente</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vente in result3 %}
+                <tr>
+                    <td>{{ vente.code_article }}</td>
+                    <td>{{ vente.libelle_article }}</td>
+                    <td>{{ vente.quantite }}</td>
+                    <td>{{ vente.prix_vente }}</td>
+                    <td>{{ vente.client }}</td>
+                    <td>{{ vente.date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <!-- Résultats pour les Usines -->
+        {% if result4 %}
+        <h3>Usines</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom Usine</th>
+                    <th>Région</th>
+                    <th>Adresse</th>
+                    <th>Téléphone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usine in result4 %}
+                <tr>
+                    <td>{{ usine.nom_usine }}</td>
+                    <td>{{ usine.region }}</td>
+                    <td>{{ usine.adresse }}</td>
+                    <td>{{ usine.telephone }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <!-- Résultats pour les Fournisseurs -->
+        {% if result5 %}
+        <h3>Fournisseurs</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom Fournisseur</th>
+                    <th>Matricule Fiscale</th>
+                    <th>Adresse</th>
+                    <th>Téléphone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fournisseur in result5 %}
+                <tr>
+                    <td>{{ fournisseur.nom_fournisseur }}</td>
+                    <td>{{ fournisseur.matricule_fiscale }}</td>
+                    <td>{{ fournisseur.adresse }}</td>
+                    <td>{{ fournisseur.telephone }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <!-- Message si aucun résultat n'est trouvé -->
+        {% if not (result1 or result2 or result3 or result4 or result5) %}
+        <div class="alert alert-warning" role="alert">
+            Aucun résultat trouvé pour votre recherche.
+        </div>
+        {% endif %}
+
+        <!-- Bouton Retour -->
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Retour à la page d'accueil</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
