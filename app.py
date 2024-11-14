@@ -1057,28 +1057,28 @@ def ajouter_demande_vente():
     if request.method == 'POST':
         try:
             # Retrieve and validate form data
-            demande_vente_data = {
-                'code_article': request.form.get('code_article'),
-                'libelle_article': request.form.get('libelle_article'),
-                'quantite': int(request.form.get('quantite', 0)),          
-                'vers': request.form.get('vers'),
-                'commande': request.form.get('commande'),
-                'assignation': request.form.get('site'),
-            }
+            
+                code_article= request.form.get('code_article'),
+                libelle_article= request.form.get('libelle_article'),
+                quantite=int(request.form.get('quantite', 0)),          
+                vers=request.form.get('vers'),
+                commande= request.form.get('commande'),
+                assignation= request.form.get('site'),
+        
 
             # Check if article exists with the specified assignment
-            article = Article.query.filter_by(code_article=demande_vente_data['code_article'], assignation=demande_vente_data['assignation']).first()
+            article = Article.query.filter_by(code_article=code_article, assignation=assignation).first()
             if not article:
                 message = "Article non trouvé."
                 return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
 
             # Verify stock quantity
-            if demande_vente_data['quantite'] > article.quantite:
+            if quantite > article.quantite:
                 message = "La quantité demandée dépasse la quantité en stock."
                 return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
 
             # Call function to add sales request
-            if fun_ajouter_demande_vente(demande_vente_data):
+            if fun_ajouter_demande_vente(code_article,libelle_article,quantite,vers,commande,assignation):
                 message = "Demande de vente ajoutée avec succès."
                 return f"""<script>alert("{message}");window.location.href = "{url_for('admin')}";</script>"""
             else:
@@ -1099,18 +1099,42 @@ def ajouter_demande_vente():
     return render_template('ajouter_demande_vente.html', Articles_data=Articles_data, usines_data=usines_data)
 
 # Function to add a sales request
-def fun_ajouter_demande_vente(data):
+def fun_ajouter_demande_vente((code_article,libelle_article,quantite,vers,commande,assignation)):
     try:
-        new_demande_vente = DemandeVente(
-            code_article=data['code_article'],
-            libelle_article=data['libelle_article'],
-            quantite=data['quantite'],
-            vers=data['vers'],
-            assignation=data['assignation'],
-            commande=data['commande'],
+            if code_article :
+                code_article=code_article
+            else:
+                code_article=0
+            if libelle_article:
+                libelle_article=libelle_article
+            else:
+                libelle_article=0
+            if quantite:
+                quantite=quantite
+            else:
+                quantite=0
+            if vers:
+                vers=vers
+            else:
+                vers=0
+            if assignation:
+                assignation=assignation
+            else:
+                assignation=0
+            if commande:
+                commande=commande
+            else:
+                commande=0
+            new_demande_vente = DemandeVente(
+            code_article=code_article,
+            libelle_article=libelle_article,
+            quantite=quantite,
+            vers=vers,
+            assignation=assignation,
+            commande=commande,
             etat=1,
             reception=1,
-        )
+        
         
         db.session.add(new_demande_vente)
         db.session.commit()
