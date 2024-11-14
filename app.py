@@ -1046,44 +1046,59 @@ def confirmer_reception_achat():
 
     # Afficher la page avec la liste des demandes d'achats
     return render_template('confirmer_reception_achat.html', demandes_achats=demandes_achats)
-
+# Route to add a new sales request
 @app.route('/ajouter_demande_vente', methods=["GET", "POST"])
 @roles_required('admin')
 def ajouter_demande_vente():
-    Articles_data=Article.query.all()
-    usines_data=Usine.query.all()
+    # Fetching data for dropdowns
+    Articles_data = Article.query.all()
+    usines_data = Usine.query.all()
+    
     if request.method == 'POST':
-        # Récupération des données du formulaire
-        demande_vente_data = {
-            'code_article': request.form.get('code_article'),
-            'libelle_article': request.form.get('libelle_article'),
-            'quantite': int(request.form.get('quantite')),          
-            'vers': request.form.get('vers'),
-            'commande': request.form.get('commande'),
-           
-        }
+        try:
+            # Retrieve and validate form data
+            demande_vente_data = {
+                'code_article': request.form.get('code_article'),
+                'libelle_article': request.form.get('libelle_article'),
+                'quantite': int(request.form.get('quantite', 0)),          
+                'vers': request.form.get('vers'),
+                'commande': request.form.get('commande'),
+                'assignation': request.form.get('site'),
+            }
 
-        # Vérification de la quantité en stock
-        article = Article.query.filter_by(code_article=demande_vente_data['code_article']).first()
-        if not article:
-            message = "Article non trouvé."
+            # Check if article exists with the specified assignment
+            article = Article.query.filter_by(code_article=demande_vente_data['code_article'], assignation=demande_vente_data['assignation']).first()
+            if not article:
+                message = "Article non trouvé."
+                return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
+
+            # Verify stock quantity
+            if demande_vente_data['quantite'] > article.quantite:
+                message = "La quantité demandée dépasse la quantité en stock."
+                return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
+
+            # Call function to add sales request
+            if fun_ajouter_demande_vente(demande_vente_data):
+                message = "Demande de vente ajoutée avec succès."
+                return f"""<script>alert("{message}");window.location.href = "{url_for('admin')}";</script>"""
+            else:
+                message = "Erreur lors de l'ajout de la demande de vente, erreur dans la route."
+                return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
+
+        except ValueError:
+            # Handle invalid integer conversion
+            message = "La quantité doit être un nombre entier."
+            return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
+        except Exception as e:
+            # General error handling
+            print(f"Unexpected error: {e}")
+            message = "Erreur inattendue lors du traitement de la demande."
             return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
 
-        # Vérification si la quantité demandée est inférieure ou égale à la quantité en stock
-        if demande_vente_data['quantite'] > article.quantite:
-            message = "La quantité demandée dépasse la quantité en stock."
-            return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
+    # Render the form with available articles and usines data
+    return render_template('ajouter_demande_vente.html', Articles_data=Articles_data, usines_data=usines_data)
 
-        # Appeler la fonction pour ajouter la demande de vente
-        if fun_ajouter_demande_vente(demande_vente_data):
-            message = "Demande de vente ajoutée avec succès."
-            return f"""<script>alert("{message}");window.location.href = "{url_for('admin')}";</script>"""
-        else:
-            message = "Erreur lors de l'ajout de la demande de vente."
-            return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
-
-    return render_template('ajouter_demande_vente.html',Articles_data=Articles_data,usines_data=usines_data)
-
+# Function to add a sales request
 def fun_ajouter_demande_vente(data):
     try:
         new_demande_vente = DemandeVente(
@@ -1091,6 +1106,7 @@ def fun_ajouter_demande_vente(data):
             libelle_article=data['libelle_article'],
             quantite=data['quantite'],
             vers=data['vers'],
+            assignation=data['assignation'],
             commande=data['commande'],
             etat=1,
             reception=1,
@@ -1100,10 +1116,9 @@ def fun_ajouter_demande_vente(data):
         db.session.commit()
         return True
     except Exception as e:
-        print(f"Erreur lors de l'ajout de la demande de vente : {e}")
+        print(f"Erreur lors de l'ajout de la demande de vente, erreur dans la fonction d'ajout de demande de vente : {e}")
         db.session.rollback()
         return False
-
 @app.route('/rechercher_demande_vente', methods=['GET', 'POST'])
 @roles_required('admin')
 def rechercher_demande_vente():
