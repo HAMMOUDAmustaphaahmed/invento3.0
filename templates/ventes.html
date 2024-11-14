@@ -180,6 +180,7 @@
                                             <th scope="col" class="sortable" onclick="sortTable(7)">
                                                 Date <i class="ri-arrow-up-down-line"></i>
                                             </th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -193,11 +194,18 @@
                                             <td>{{ vente.assignation }}</td>
                                             <td>{{ vente.vers }}</td>
                                             <td>{{ vente.date.strftime('%d-%m-%Y') }}</td>
+                                            <td>
+                                                <form action="{{ url_for('supprimer_vente') }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette vente ?');">
+                                                    <input type="hidden" name="code_demande" value="{{ vente.code_demande }}">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
+                            
 <script>
     let sortDirection = true;
 let lastSortedColumn = null;

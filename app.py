@@ -299,9 +299,9 @@ def rechercher_article():
 @roles_required('admin')
 def editer_article():
         all_articles=Article.query.all()
-        code_article = request.form.get('code_article')
+        id_article= request.form.get('id_article')
         action = request.form.get('action')  # Récupérer l'action (edit ou delete)
-        article = fun_info_article(code_article)
+        article = fun_info_article(id_article)
        
         if action == 'edit':
             if article:
@@ -314,8 +314,7 @@ def editer_article():
                 article.fournisseur = request.form.get('fournisseur')
                 article.quantite_min = request.form.get('quantite_min')
                 article.image = request.form.get('devis')
-                print(article.image)
-                print(len(article.image))
+                
 
 
                 # Valider les données et committer les mises à jour
@@ -362,55 +361,89 @@ def details_article():
     code_article = request.form.get('code_article')
     article = fun_info_article(code_article)
     return render_template('details_article.html',Artciles_data=Artciles_data)  # Rediriger si aucune action trouvée
-    
+
+@app.route('/supprimer_vente', methods=['POST'])
+@roles_required('admin')
+def supprimer_vente():
+    code_demande = request.form.get('code_demande')
+
+    # Rechercher la vente dans la base de données
+    vente = DemandeVente.query.filter_by(code_demande=code_demande).first()
+
+    if vente:
+        try:
+            # Supprimer la vente de la base de données
+            db.session.delete(vente)
+            db.session.commit()
+            flash('La vente a été supprimée avec succès.', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erreur lors de la suppression : {str(e)}', 'danger')
+    else:
+        flash('Vente introuvable.', 'danger')
+
+    return redirect(url_for('ventes'))
+
+
 @app.route('/transfere_article', methods=['POST', 'GET'])
 @roles_required('admin')
 def transfere_article():
-    Artciles_data = Article.query.all()
+    Articles_data = Article.query.all()
 
     if request.method == 'POST':
         # Récupérer les données du formulaire
         code_article = request.form.get('code_article')
         quantite_transfer = int(request.form['quantite_transfer'])
-        site = request.form['site']
+        site_expédition = request.form['site_expédition']
+        site_destination = request.form['site_destination']
 
-        # Vérifier si l'article existe
-        article = Article.query.filter_by(code_article=code_article).first()
+        if site_expédition == site_destination:
+            
+            return '<script>alert("Le site d expédition et le site de destination ne peuvent pas être identiques.");</script>'
 
-        if article:
-            # Vérifier si l'article a le même site d'assignation
-            article_site = Article.query.filter_by(code_article=code_article, assignation=site).first()
+        # Vérifier si l'article existe dans le site d'expédition
+        article_expédition = Article.query.filter_by(code_article=code_article, assignation=site_expédition).first()
 
-            if article_site:
-                # Si l'article avec le même site existe, ajouter la quantité transférée
-                article_site.quantite += quantite_transfer
-                flash(f'Quantité ajoutée à l\'article existant pour {site}.', 'success')
+        if article_expédition:
+            if article_expédition.quantite < quantite_transfer:
+                
+                return '<script>alert("Quantité insuffisante dans le site d expédition.");</script>'
+
+            # Vérifier si l'article existe dans le site de destination
+            article_destination = Article.query.filter_by(code_article=code_article, assignation=site_destination).first()
+
+            if article_destination:
+                # Ajouter la quantité transférée à l'article existant
+                article_destination.quantite += quantite_transfer
+                
+                return '<script>alert("Quantité transferer avec succees.");</script>'
             else:
-                # Si l'article avec le site n'existe pas, créer un nouveau article avec la quantité transférée
+                # Créer un nouvel article pour le site de destination
                 new_article = Article(
-                    code_article=article.code_article,
-                    libelle_article=article.libelle_article,
-                    prix_achat=article.prix_achat,
-                    fournisseur=article.fournisseur,
-                    assignation=site,
-                    quantite=quantite_transfer,  # La quantité transférée devient la quantité initiale du nouvel article
-                    quantite_min=article.quantite_min,  # Vous pouvez ajouter des champs supplémentaires si nécessaire
-                    date=datetime.utcnow(),  # Assurez-vous de mettre à jour la date
-                    image=article.image
+                    code_article=article_expédition.code_article,
+                    libelle_article=article_expédition.libelle_article,
+                    prix_achat=article_expédition.prix_achat,
+                    fournisseur=article_expédition.fournisseur,
+                    assignation=site_destination,
+                    quantite=quantite_transfer,
+                    quantite_min=article_expédition.quantite_min,
+                    date=datetime.now(timezone.utc),
+                    image=article_expédition.image
                 )
                 db.session.add(new_article)
-                flash(f'Nouvel article créé pour {site} avec la quantité transférée.', 'success')
+                flash(f"Nouvel article créé pour avec la quantité transférée.", 'success')
 
-            # Mettre à jour la quantité de l'article original
-            article.quantite -= quantite_transfer
+            # Réduire la quantité dans le site d'expédition
+            article_expédition.quantite -= quantite_transfer
 
-            # Commit les changements dans la base de données
+            # Commit les changements
             db.session.commit()
-
         else:
-            flash('Article introuvable', 'danger')
+            return '<script>alert("Article introuvable dans le site d expédition.");</script>'
 
-    return render_template('transfere_article.html', Artciles_data=Artciles_data)
+
+    return render_template('transfere_article.html', Articles_data=Articles_data)
+
 
 
 
@@ -1018,6 +1051,8 @@ def confirmer_reception_achat():
 @app.route('/ajouter_demande_vente', methods=["GET", "POST"])
 @roles_required('admin')
 def ajouter_demande_vente():
+    Articles_data=Article.query.all()
+    usines_data=Usine.query.all()
     if request.method == 'POST':
         # Récupération des données du formulaire
         demande_vente_data = {
@@ -1048,7 +1083,7 @@ def ajouter_demande_vente():
             message = "Erreur lors de l'ajout de la demande de vente."
             return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_vente')}";</script>"""
 
-    return render_template('ajouter_demande_vente.html')
+    return render_template('ajouter_demande_vente.html',Articles_data=Articles_data,usines_data=usines_data)
 
 def fun_ajouter_demande_vente(data):
     try:
@@ -1479,8 +1514,8 @@ def fun_info_demande_achat(code_demande):
     demande_achat_data = DemandeAchat.query.filter_by(code_demande=code_demande)
     return demande_achat_data
 
-def fun_info_article(code_article):
-    article_data = Article.query.filter_by(code_article=code_article).first()
+def fun_info_article(id_article):
+    article_data = Article.query.filter_by(id_article=id_article).first()
     return article_data
 
 def fun_info_fournisseur(nom_fournisseur):

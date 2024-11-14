@@ -410,19 +410,159 @@
                                     <form action="{{ url_for('ajouter_demande_vente') }}" method="POST">
                 
                                         <div class="mb-3">
-                                            <label for="code_article" class="form-label">Code Article</label>
-                                            <input type="text" name="code_article" class="form-control" id="code_article" placeholder="Entrez le code article" required>
+                                            <label for="code_article" class="form-label">Code Article :</label>
+
+                                            <!-- Liste des codes articles existants -->
+                                            <select id="code_article_list" class="form-control">
+                                                <option value="" disabled selected>Code Article Existant :</option>
+                                                {% for article in Articles_data %}
+                                                    <option value="{{ article.code_article }}">{{ article.code_article }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                            <!-- Champ de texte pour entrer manuellement le code article -->
+                                            <input type="text" id="code_article_input" name="code_article" class="form-control mt-2" placeholder="Entrer le code article manuellement" required>
+                                            <small id="validation_message_code_article" class="form-text"></small>
                                         </div>
-                
-                                        <div class="mb-3">                                           
-                                            <label class="form-label" for="libelle_article">Libellé Article</label>
-                                            <input type="text" name="libelle_article" class="form-control" placeholder="Entrez le libellé de l'article" id="libelle_article" required>                                           
-                                        </div>
-                
+
+                                        <!-- Section pour le libellé article -->
                                         <div class="mb-3">
-                                            <label for="vers" class="form-label">Vers</label>
-                                            <input type="text" name="vers" class="form-control" id="vers" placeholder="Entrez l'adresse de livraison" required>
+                                            <label for="libelle_article" class="form-label">Libellé Article :</label>
+
+                                            <!-- Liste des libellés articles existants -->
+                                            <select id="libelle_article_list" class="form-control">
+                                                <option value="" disabled selected>Libellé Article Existant :</option>
+                                                {% for article in Articles_data %}
+                                                    <option value="{{ article.libelle_article }}">{{ article.libelle_article }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                            <!-- Champ de texte pour entrer manuellement le libellé article -->
+                                            <input type="text" id="libelle_article_input" name="libelle_article" class="form-control mt-2" placeholder="Entrer le libellé article manuellement" required>
+                                            <small id="validation_message_libelle_article" class="form-text"></small>
                                         </div>
+
+                                        <script>
+                                            // Validation pour le code article
+                                            const codeArticleList = document.getElementById('code_article_list');
+                                            const codeArticleInput = document.getElementById('code_article_input');
+                                            const validationMessageCodeArticle = document.getElementById('validation_message_code_article');
+                                        
+                                            function validateCodeArticle() {
+                                                const inputValue = codeArticleInput.value.trim();
+                                                const options = Array.from(codeArticleList.options).map(option => option.value);
+                                        
+                                                if (options.includes(inputValue)) {
+                                                    codeArticleInput.classList.remove('is-invalid');
+                                                    codeArticleInput.classList.add('is-valid');
+                                                    validationMessageCodeArticle.textContent = "Le code article est valide.";
+                                                    validationMessageCodeArticle.style.color = "green";
+                                                } else {
+                                                    codeArticleInput.classList.remove('is-valid');
+                                                    codeArticleInput.classList.add('is-invalid');
+                                                    validationMessageCodeArticle.textContent = "Le code article n'existe pas dans votre magasin.";
+                                                    validationMessageCodeArticle.style.color = "red";
+                                                }
+                                            }
+                                        
+                                            // Validation pour le libellé article
+                                            const libelleArticleList = document.getElementById('libelle_article_list');
+                                            const libelleArticleInput = document.getElementById('libelle_article_input');
+                                            const validationMessageLibelleArticle = document.getElementById('validation_message_libelle_article');
+                                        
+                                            function validateLibelleArticle() {
+                                                const inputValue = libelleArticleInput.value.trim();
+                                                const options = Array.from(libelleArticleList.options).map(option => option.value);
+                                        
+                                                if (options.includes(inputValue)) {
+                                                    libelleArticleInput.classList.remove('is-invalid');
+                                                    libelleArticleInput.classList.add('is-valid');
+                                                    validationMessageLibelleArticle.textContent = "Le libellé article est valide.";
+                                                    validationMessageLibelleArticle.style.color = "green";
+                                                } else {
+                                                    libelleArticleInput.classList.remove('is-ivalid');
+                                                    libelleArticleInput.classList.add('is-invalid');
+                                                    validationMessageLibelleArticle.textContent = "Le libellé article n'existe pas dans votre magasin.";
+                                                    validationMessageLibelleArticle.style.color = "red";
+                                                }
+                                            }
+                                        
+                                            // Ajouter des écouteurs d'événements pour les deux inputs
+                                            codeArticleInput.addEventListener('input', validateCodeArticle);
+                                            libelleArticleInput.addEventListener('input', validateLibelleArticle);
+                                        </script>
+                
+                <div class="mb-3">
+                    <label for="vers" class="form-label">Usine</label>
+                
+                    <!-- Case à cocher pour saisir manuellement -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="manualInputCheck">
+                        <label class="form-check-label" for="manualInputCheck">
+                            Saisir manuellement
+                        </label>
+                    </div>
+                
+                    <!-- Input pour saisir un fournisseur manuellement -->
+                    <input type="text" name="vers" class="form-control" id="manualUsine" placeholder="Entrez l'usine manuellement" disabled>
+                
+                    <!-- Liste déroulante pour choisir un fournisseur -->
+                    <select name="vers" id="vers" class="form-control" required>
+                        <option value="" disabled selected>Choisir la Destination de Vente</option>
+                        {% for usine in usines_data %}
+                            <option value="{{ usine.nom_usine }}">{{ usine.nom_usine }}</option>
+                        {% endfor %}
+                    </select>
+                
+                    <!-- Message d'erreur s'affiche si la case n'est pas cochée et l'utilisateur commence à saisir -->
+                    <small id="manualInputWarning" class="text-danger" style="display: none;">
+                        Pour valider votre saisie, cochez la case.
+                    </small>
+                </div>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const manualInputCheck = document.getElementById('manualInputCheck');
+                        const manualUsine = document.getElementById('manualUsine');
+                        const selectUsine = document.getElementById('vers');
+                        const manualInputWarning = document.getElementById('manualInputWarning');
+                
+                        // Fonction pour activer/désactiver l'input manuel en fonction de la case à cocher
+                        manualInputCheck.addEventListener('change', function () {
+                            if (manualInputCheck.checked) {
+                                manualUsine.disabled = false;
+                                selectUsine.disabled = true;
+                                selectUsine.value = ''; // Réinitialiser la sélection
+                                manualInputWarning.style.display = 'none'; // Cacher le message d'avertissement
+                            } else {
+                                manualUsine.disabled = true;
+                                selectUsine.disabled = false;
+                                manualUsine.value = ''; // Réinitialiser la saisie manuelle
+                            }
+                        });
+                
+                        // Vérifier si l'utilisateur commence à saisir manuellement
+                        manualUsine.addEventListener('input', function () {
+                            if (!manualInputCheck.checked) {
+                                manualInputWarning.style.display = 'inline'; // Afficher le message
+                            } else {
+                                manualInputWarning.style.display = 'none'; // Cacher le message
+                            }
+                        });
+                
+                        // Lorsque l'utilisateur choisit un fournisseur dans la liste déroulante
+                        selectUsine.addEventListener('change', function () {
+                            manualUsine.value = selectUsine.value; // Mettre à jour la valeur de l'input manuel
+                            manualInputWarning.style.display = 'none'; // Cacher le message d'avertissement
+                        });
+                
+                        // Masquer le message d'avertissement au chargement si un fournisseur est déjà sélectionné
+                        if (selectUsine.value !== '') {
+                            manualInputWarning.style.display = 'none';
+                        }
+                    });
+                </script>
+                
                 
                                         <div class="mb-3">
                                             <label for="quantite" class="form-label">Quantité</label>
