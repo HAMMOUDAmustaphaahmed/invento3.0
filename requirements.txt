@@ -3,3 +3,4 @@ Flask-SQLAlchemy
 Werkzeug
 SQLAlchemy
 mysql-connector-python
+PyMySQL
