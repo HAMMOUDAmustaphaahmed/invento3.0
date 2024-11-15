@@ -8,11 +8,8 @@ from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 
-<<<<<<< HEAD
+
 app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+mysqlconnector://avnadmin:AVNS_C96xtkYSwqY0qMlZ2aS@mysql-2ef51fa8-hammouda-9afc.h.aivencloud.com:19722/invento')
-=======
-app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+mysqlconnector://root:root@localhost:3306/invento')
->>>>>>> 30b4eda (1.0)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'invento_clé_secrète'
 # Initialize SQLAlchemy with the app
@@ -87,8 +84,7 @@ def logout():
         session.clear()  # Efface la session pour déconnecter l'utilisateur
         return redirect(url_for('login'))
 
-<<<<<<< HEAD
-=======
+
 @app.route('/ajouter_piece', methods=["GET", "POST"])
 def ajouter_piece():
     pieces = Piece.query.all()
@@ -220,7 +216,7 @@ def supprimer_piece():
 
 
 
-# Route pour la page d'administration
+
 @app.route('/admin')
 @roles_required('admin')
 def admin():
@@ -974,16 +970,6 @@ def ajouter_demande_achat():
                     return f"""<script>alert("{message}");window.location.href = "{url_for('ajouter_demande_achat')}";</script>"""
             return render_template('ajouter_demande_achat.html')
      
-
-<<<<<<< HEAD
-
-    
-
-
-    # routes.py
-
-=======
->>>>>>> 30b4eda (1.0)
 @app.route('/rechercher_demande_achat', methods=['GET', 'POST'])
 @roles_required('admin')
 def rechercher_demande_achat():
@@ -1736,9 +1722,7 @@ class Article(db.Model):
     quantite_min = db.Column(db.Integer, nullable=False)
     image=db.Column(db.String(255),nullable=True)
 
-<<<<<<< HEAD
-=======
-# Piece Model
+
 class Piece(db.Model):
     __tablename__ = 'piece'
     id_piece = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -1752,8 +1736,7 @@ class Piece(db.Model):
     quantite_min_piece = db.Column(db.Integer, nullable=False)
     devise=db.Column(db.String(20),nullable=True)
 
->>>>>>> 30b4eda (1.0)
-# Supplier Model (Fournisseur)
+
 class Fournisseur(db.Model):
     __tablename__ = 'fournisseur'
     id_fournisseur = db.Column(db.Integer, primary_key=True, autoincrement=True)
