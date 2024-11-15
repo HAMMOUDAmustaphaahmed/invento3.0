@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
+
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/apps-ecommerce-product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:45:53 GMT -->
+<head>
+
+    <meta charset="utf-8" />
+    <title>INVENTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    
+    <link href="{{ url_for('static', filename='assets/images/favicon.ico') }}" rel="shortcut icon" />
+    <!--Swiper slider css-->
+    <link href="{{ url_for('static', filename='assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- Layout config Js -->
+   
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+
+    <!-- Bootstrap Css -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ url_for('static', filename='assets/css/icons.min.css') }}"  rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link  href="{{ url_for('static', filename='assets/css/app.min.css') }}"  rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{{ url_for('static', filename='assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    
+
+</head>
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+       
+
+
+
+        <!-- ========== App Menu ========== -->
+        <div class="app-menu navbar-menu">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <!-- Dark Logo-->
+                <a href="index.html" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-dark.png" alt="" height="17">
+                    </span>
+                </a>
+                <!-- Light Logo-->
+                <a href="index.html" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-light.png" alt="" height="17">
+                    </span>
+                </a>
+                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+                    <i class="ri-record-circle-line"></i>
+                </button>
+            </div>
+    
+            <div class="dropdown sidebar-user m-1 rounded">
+                <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="d-flex align-items-center gap-2">
+                        <img class="rounded header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                        <span class="text-start">
+                            <span class="d-block fw-medium sidebar-user-name-text">Admin</span>
+                            <span class="d-block fs-14 sidebar-user-name-sub-text"><i class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span class="align-middle">Online</span></span>
+                        </span>
+                    </span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <h6 class="dropdown-header">Welcome Admin</h6>
+                    <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                    <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
+                    <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>
+                    <a class="dropdown-item" href="pages-faqs.html"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a>
+                    <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
+                    <a class="dropdown-item" href="auth-lockscreen-basic.html"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a>
+                    <a class="dropdown-item" href="auth-logout-basic.html"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+                </div>
+            </div>
+            
+
+            {% include 'scrollbar.html' %}
+
+            <div class="sidebar-background"></div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div id="layout-wrapper">
+
+ 
+                <!-- Left Sidebar End -->
+                <!-- Vertical Overlay-->
+                
+        
+                <!-- ============================================================== -->
+                <!-- Start right Content here -->
+                <!-- ============================================================== -->
+        
+                    <div class="page-content">
+                        <div class="container-fluid">
+                            <!-- start page title -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                                        <h4 class="mb-sm-0">Transfert Article</h4>
+                        
+                                        <div class="page-title-right">
+                                            <ol class="breadcrumb m-0">
+                                                <li class="breadcrumb-item"><a href="/">Invento</a></li>
+                                                <li class="breadcrumb-item active">Transfert Article</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end page title -->
+                        
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table align-middle mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">Code Article</th>
+                                                            <th scope="col">Libellé Article</th>
+                                                            <th scope="col">Prix Achat</th>
+                                                            <th scope="col">Devise</th>
+                                                            <th scope="col">Assignation</th>
+                                                            <th scope="col">Quantité</th>
+                                                            <th scope="col">Fournisseur</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Quantité Min</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for article in Articles_data %}
+                                                        <tr>
+                                                            <td>{{ article.code_article }}</td>
+                                                            <td>{{ article.libelle_article }}</td>
+                                                            <td>{{ article.prix_achat }}</td>
+                                                            <td>{{ article.image }}</td>
+                                                            <td>{{ article.assignation }}</td>
+                                                            <td>{{ article.quantite }}</td>
+                                                            <td>{{ article.fournisseur }}</td>
+                                                            <td>{{ article.date.strftime('%d-%m-%Y') }}</td>
+                                                            <td>{{ article.quantite_min }}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Transfert Quantité -->
+                            <form action="{{ url_for('transfere_article') }}" method="POST">
+                                <div class="mt-4">
+                                    <h5>Transfert de Quantité</h5>
+                            
+                                    <div class="form-group">
+                                        <label for="code_article">Code Article :</label>
+                                        <input type="text" class="form-control" id="code_article" name="code_article" required>
+                                    </div>
+                            
+                                    <div class="form-group mt-3">
+                                        <label for="quantite_transfer">Quantité à transférer :</label>
+                                        <input type="number" class="form-control" id="quantite_transfer" name="quantite_transfer" required min="1">
+                                    </div>
+                            
+                                    <div class="mt-3">
+                                        <label for="site_expédition">Choisissez le site d'expédition :</label><br>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="site_expédition" id="sahel" value="MAG SAHEL" required>
+                                            <label class="form-check-label" for="sahel">MAG SAHEL</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="site_expédition" id="gafsa" value="MAG GAFSA" required>
+                                            <label class="form-check-label" for="gafsa">MAG GAFSA</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="site_expédition" id="kasserine" value="MAG KASSERINE" required>
+                                            <label class="form-check-label" for="kasserine">MAG KASSERINE</label>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="mt-3">
+                                        <label for="site_destination">Choisissez le site de destination :</label><br>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="site_destination" id="sahel_dest" value="MAG SAHEL" required>
+                                            <label class="form-check-label" for="sahel_dest">MAG SAHEL</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="site_destination" id="gafsa_dest" value="MAG GAFSA" required>
+                                            <label class="form-check-label" for="gafsa_dest">MAG GAFSA</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="site_destination" id="kasserine_dest" value="MAG KASSERINE" required>
+                                            <label class="form-check-label" for="kasserine_dest">MAG KASSERINE</label>
+                                        </div>
+                                    </div>
+                            
+                                    <button type="submit" class="btn btn-primary mt-3">Transférer</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © INVENTO.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Hammouda Ahmed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+    <!--preloader-->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner-border text-primary avatar-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
+    
+    <script src="{{ url_for('static', filename='assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/feather-icons/feather.min.js') }}"></script>
+
+    <!-- App, Layout et Plugins -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+
+    <!-- ApexCharts et autres scripts dans pages -->
+    <script src="{{ url_for('static', filename='assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/dashboard-ecommerce.init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/apexcharts-line.init.js') }}"></script>
+
+</body>
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/apps-ecommerce-product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:45:54 GMT -->
+</html>

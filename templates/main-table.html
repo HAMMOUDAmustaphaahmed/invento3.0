@@ -1,0 +1,472 @@
+<div class="row">
+    <div class="col-xl-15 ">
+       
+            <div class="card">
+                <!-- Header avec bouton Ajouter et barre de recherche -->
+                <div class="card-header border-0">
+                    <div class="row g-4">
+                        <div class="col-sm-auto">
+                            <div>
+                                <a href="/ajouter_article" class="btn btn-soft-danger" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Ajouter Article</a>
+                                <a href="/ajouter_usine" class="btn btn-soft-success" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Ajouter Usine</a>
+                                <a href="/ajouter_fournisseur" class="btn btn-soft-info" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Ajouter Fournisseur</a>
+                                <a href="/ajouter_user" class="btn btn-soft-secondary" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Ajouter User</a>
+                                <a href="/ajouter_demande_achat" class="btn btn-soft-danger" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Ajouter Demande Achat</a>
+                                <a href="/ajouter_demande_vente" class="btn btn-soft-info" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Ajouter Demande Vente</a>
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Onglets principaux -->
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#tab-articles" role="tab">
+                                        Articles <span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ articles_count }} </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab-achats" role="tab">
+                                        Achats <span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ achats_count }}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab-ventes" role="tab">
+                                        Ventes<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ ventes_count }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab_demandes_achats" role="tab">
+                                        Demandes Achats<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ demandes_achats_count }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab_demandes_ventes" role="tab">
+                                        Demandes Ventes<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ demandes_ventes_count }}
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab_users" role="tab">
+                                        Users<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ users_count }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab_fournisseurs" role="tab">
+                                        Fournisseurs<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ fournisseurs_count }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#tab_usines" role="tab">
+                                        Usines<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ usines_count }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Contenu des onglets -->
+                <div class="card-body">
+                    <div class="tab-content text-muted">
+                        <!-- Onglet Articles -->
+                        <div class="tab-pane active" id="tab-articles" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonArticles" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonArticles">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Code Article</th>
+                                            <th scope="col">Libelle Article</th>
+                                            <th scope="col">Prix Achat</th>
+                                            <th scope="col">Assignation</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Fournisseur</th>
+                                            <th scope="col">Quantité Minimale</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for article in articles %}
+                                        <tr>
+                                            <td><a class="fw-semibold">{{ article.code_article }}</a></td>
+                                            <td>{{ article.libelle_article }}</td>
+                                            <td>{{ article.prix_achat }}</td>
+                                            <td>{{ article.assignation }}</td>
+                                            <td><a class="fw-semibold">{{ article.quantite }}</a></td>
+                                            <td>{{ article.fournisseur }}</td>
+                                            <td>{{ article.quantite_min }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                   
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Achats -->
+                        <div class="tab-pane" id="tab-achats" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonAchats" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonAchats">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Lot</th>
+                                            <th scope="col">Code Article</th>
+                                            <th scope="col">Libelle Article</th>
+                                            <th scope="col">Prix Achat</th>
+                                            <th scope="col">Assignation</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Fournisseur</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for achat in achats %}
+                                        <tr>
+                                            <td><a class="fw-semibold">{{ achat.lot }}</a></td>
+                                            <td><a href="" class="fw-semibold">{{ achat.code_article }}</a></td>
+                                            <td>{{ achat.libelle_article }}</td>
+                                            <td>{{ achat.prix_achat }}</td>
+                                            <td>{{ achat.assignation }}</td>
+                                            <td><a href="" class="fw-semibold">{{ achat.quantite }}</a></td>
+                                            <td>{{ achat.fournisseur }}</td>
+                                            <td>{{ achat.date }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Ventes -->
+                        <div class="tab-pane" id="tab-ventes" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonVentes" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonVentes">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            
+                                            <th scope="col">Code Article</th>
+                                            <th scope="col">Libelle Article</th>
+                                            <th scope="col">Prix Vente</th>
+                                            <th scope="col">Assignation</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Vers</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for vente in ventes %}
+                                        <tr>
+                                            
+                                            <td><a href="" class="fw-semibold">{{ vente.code_article }}</a></td>
+                                            <td>{{ vente.libelle_article }}</td>
+                                            <td>{{ vente.prix_vente }}</td>
+                                            <td>{{ vente.assignation }}</td>
+                                            <td><a href="" class="fw-semibold">{{ vente.quantite }}</a></td>
+                                            <td>{{ vente.vers }}</td>
+                                            <td>{{ vente.date }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot class="table-light">
+                                        
+                                        <tr>
+                                            <td colspan="4">Quantité Totale</td>
+                                            <td>{{ quantite_vente_totale }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7">Total</td>
+                                            <td>{{ prix_vente_totale }}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Demandes Achats-->
+                        <div class="tab-pane " id="tab_demandes_achats" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonDemandesAchats" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonDemandesAchats">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Code Demande</th>
+                                            <th scope="col">Code Article</th>
+                                            <th scope="col">Libelle Article</th>
+                                            <th scope="col">Quantite</th>
+                                            <th scope="col">Assignation</th>
+                                           
+                                            <th scope="col">Etat</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+                                            
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for demande_achat in demandes_achats_data %}
+                                        <tr>
+                                            <td>{{ demande_achat.code_demande }}</td>
+                                            <td><a class="fw-semibold">{{ demande_achat.code_article }}</a></td>
+                                            <td>{{ demande_achat.libelle_article }}</td>
+                                            <td>{{ demande_achat.quantite }}</td>
+                                           
+                                            <td><a class="fw-semibold">{{ demande_achat.assignation }}</a></td>
+                                            
+                                            <td>
+                                                {% if demande_achat.etat == 1 %}
+                                                    <span class="badge bg-warning">En attente</span>
+                                                {% else %}
+                                                    <span class="badge bg-success">Accepter</span>
+                                                {% endif %}
+                                            </td>                                            
+                                            <td>{{ demande_achat.date }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot class="table-light">
+                                        <tr>
+                                            <td colspan="3">Total</td>
+                                            <td>{{ quantite_totale_demandes_achats }}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Demandes Ventes-->
+                        <div class="tab-pane " id="tab_demandes_ventes" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonDemandesVentes" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonDemandesVentes">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Code Demande</th>
+                                            <th scope="col">Code Article</th>
+                                            <th scope="col">Libelle Article</th>
+                                            <th scope="col">Quantite</th>
+                                            <th scope="col">Vers</th>
+                                            <th scope="col">Commande</th>
+                                            <th scope="col">Prix</th>
+                                            <th scope="col">Etat</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for demande_vente in demandes_ventes_data %}
+                                        <tr>
+                                            <td>{{ demande_vente.code_demande }}</td>
+                                            <td><a class="fw-semibold">{{ demande_vente.code_article }}</a></td>
+                                            <td>{{ demande_vente.libelle_article }}</td>
+                                            <td>{{ demande_vente.quantite }}</td>
+                                            <td>{{ demande_vente.vers }}</td>
+                                            <td><a class="fw-semibold">{{ demande_vente.commande }}</a></td>
+                                            <td>{{ demande_vente.Prix }}</td>
+                                            <td>
+                                                {% if demande_vente.etat == 1 %}
+                                                    <span class="badge bg-warning">En attente</span>
+                                                {% else %}
+                                                    <span class="badge bg-success">Accepter</span>
+                                                {% endif %}
+                                            </td>
+                                            
+                                            <td>{{ demande_vente.date }}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot class="table-light">
+                                        <tr>
+                                            <td colspan="3">Total</td>
+                                            <td>{{ quantite_totale_demandes_ventes }}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Users-->
+                        <div class="tab-pane " id="tab_users" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonUsers" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonUsers">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Emplacement</th>
+                                            <th scope="col">Role</th>
+                                            <th scope="col">Telephone</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users_data %}
+                                        <tr>
+                                            <td><a class="fw-semibold">{{ user.username }}</a></td>
+                                            <td>{{ user.emplacement }}</td>
+                                            <td>{{ user.role }}</td>
+                                            <td>{{ user.numero_telephone }}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Usines-->
+                        <div class="tab-pane " id="tab_usines" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonUsines" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonUsines">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Region</th>
+                                            <th scope="col">Adresse</th>
+                                            <th scope="col">Telephone</th> 
+                                            <th scope="col">Etat</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for usine in usines_data %}
+                                        <tr>
+                                            <td><a class="fw-semibold">{{ usine.nom_usine }}</a></td>
+                                            <td>{{ usine.region }}</td>
+                                            <td>{{ usine.adresse }}</td>
+                                            <td>{{ usine.telephone }}</td>
+                                            <td>{{ usine.etat }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                         <!-- Onglet Fournisseurs-->
+                         <div class="tab-pane " id="tab_fournisseurs" role="tabpanel">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="btn-group">
+                                    <button id="exportButtonFournisseurs" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Exporter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportButtonFournisseurs">
+                                        <a class="dropdown-item" href="#"><i class="ri-file-excel-line"></i> Exporter en Excel</a>
+                                        <a class="dropdown-item" href="#"><i class="ri-file-pdf-line"></i> Exporter en PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Matricule Fiscale</th>
+                                            <th scope="col">Adresse</th>
+                                            <th scope="col">Telephone</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for fournisseur in fournisseurs_data %}
+                                        <tr>
+                                            <td><a class="fw-semibold">{{ fournisseur.nom_fournisseur }}</a></td>
+                                            <td>{{ fournisseur.matricule_fiscale }}</td>
+                                            <td>{{ fournisseur.adresse }}</td>
+                                            <td>{{ fournisseur.telephone }}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Fin du card body -->
+            </div>
+        
+    </div>
+</div>

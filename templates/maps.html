@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des Usines en Tunisie</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        #region-filter {
+            margin: 20px;
+        }
+        #map {
+            height: 850px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="region-filter">
+        <label for="region">Sélectionner une région :</label>
+        <select id="region" onchange="filterFactories()">
+            <option value="all">Tous</option>
+            <option value="sahel">Sahel</option>
+            <option value="gafsa">Gafsa</option>
+            <option value="kasserine">Kasserine</option>
+        </select>
+    </div>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([34.0, 9.5], 7); // Center on Tunisia
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        const factories = [{ name: 'AFROTEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'AFROTEXSM', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'AFROTEXTG', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'A-TEX', lat: 34.4292, lng: 8.7641, region: 'gafsa' },
+        { name: 'BIGATEX', lat: 34.4252, lng: 8.7639, region: 'gafsa' },
+        { name: 'CREATEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'GSC TG', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'HAYTEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'IBCS RM', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'KHCF', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'MARNATEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'NEJIATEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'OLFATEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'STAR12 SM', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'STARTEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        { name: 'WAJIHTEX', lat: 34.4230, lng: 8.7753, region: 'gafsa' },
+        {name: 'AMEN', lat: 35.1650, lng: 8.8693, region: 'kasserine' },
+        { name: 'AMISTEK', lat: 35.1472, lng: 8.6543, region: 'kasserine' },
+        { name: 'AZIZ', lat: 35.2012, lng: 8.8394, region: 'kasserine' },
+        { name: 'BAHA', lat: 35.2051, lng: 8.5499, region: 'kasserine' },
+        { name: 'BENATEX', lat: 35.2034, lng: 8.7796, region: 'kasserine' },
+        { name: 'BIS BRODLAND', lat: 35.2005, lng: 8.8355, region: 'kasserine' },
+        { name: 'CESAR', lat: 35.2060, lng: 8.8684, region: 'kasserine' },
+        { name: 'CHAHDTEXCF', lat: 35.2012, lng: 8.8368, region: 'kasserine' },
+        { name: 'CMKA', lat: 35.2004, lng: 8.8586, region: 'kasserine' },
+        { name: 'DHAHRI A', lat: 35.2010, lng: 8.8294, region: 'kasserine' },
+        { name: 'FERTEX', lat: 35.2211, lng: 8.6548, region: 'kasserine' },
+        { name: 'ISOMERAZE', lat: 35.2220, lng: 8.6420, region: 'kasserine' },
+        { name: 'LAAYOUNTEA', lat: 35.1540, lng: 8.6263, region: 'kasserine' },
+        { name: 'SUFFEITULA', lat: 35.1502, lng: 8.6601, region: 'kasserine' },
+        { name: 'TEX PRINT SM', lat: 35.2036, lng: 8.7797, region: 'kasserine' },
+        { name: 'VISCOSA CF', lat: 35.2034, lng: 8.8660, region: 'kasserine' },
+        { name: 'AH', lat: 35.6823, lng: 10.8495, region: 'sahel' },
+        { name: 'BABY', lat: 35.6830, lng: 10.9505, region: 'sahel' },
+        { name: 'BENTEXA', lat: 35.6753, lng: 10.8768, region: 'sahel' },
+        { name: 'BHA', lat: 35.6820, lng: 10.8480, region: 'sahel' },
+        { name: 'BIT', lat: 35.6758, lng: 10.7713, region: 'sahel' },
+        { name: 'BRODLAND', lat: 35.6742, lng: 10.7915, region: 'sahel' },
+        
+        { name: 'BSP', lat: 35.5572, lng: 10.9118, region: 'sahel' },
+        { name: 'CREATIONCF', lat: 35.4235, lng: 10.8672, region: 'sahel' },
+        
+        { name: "DEFI", "lat": 35.5862, "lng": 10.8251, "region": "sahel" },
+        { name: "ENFAVETCF1", "lat": 35.6257, "lng": 10.8923, "region": "sahel" },
+        { name: "ESCONFINT", "lat": 35.6741, "lng": 10.8915, "region": "sahel" },
+        { name: "GNC", "lat": 35.5810, "lng": 10.7458, "region": "sahel" },
+        { name: 'IAS SM', lat: 35.7724, lng: 10.8322, region: 'sahel' },
+        { name: 'Lareine', lat: 35.6822, lng: 10.7468, region: 'sahel' },
+        { name: 'LEOMINORCF', lat: 35.5120, lng: 10.8824, region: 'sahel' },
+        { name: 'MARMA', lat: 35.7594, lng: 10.8144, region: 'sahel' },
+        { name: 'MENGIATEX', lat: 35.6750, lng: 10.8918, region: 'sahel' },
+        { name: 'NATEX', lat: 35.6838, lng: 10.8462, region: 'sahel' },
+        { name: 'SAGHATEX', lat: 35.7750, lng: 10.8200, region: 'sahel' },
+        { name: 'SIME', lat: 35.4260, lng: 10.8767, region: 'sahel' },
+        { name: 'SOREN', lat: 35.6823, lng: 10.7495, region: 'sahel' },
+        { name: 'TAROM', lat: 35.6753, lng: 10.8768, region: 'sahel' },
+        { name: 'TEXDRILL', lat: 35.6750, lng: 10.8910, region: 'sahel' },
+        { name: 'TG-BE', lat: 35.6755, lng: 10.7920, region: 'sahel' },
+        { name: 'VESTEX', lat: 35.6750, lng: 10.8918, region: 'sahel' },
+        { name: 'ZECE', lat: 35.6823, lng: 10.7495, region: 'sahel' },
+        { name: 'socaf', lat: 35.661, lng: 10.898, region: 'Sahel' }, // Ksour Essef
+        { name: 'sperenza', lat: 35.661, lng: 10.898, region: 'Sahel' }, // Ksour Essef
+        { name: 'cyc', lat: 35.661, lng: 10.898, region: 'Sahel' }, // Ksour Essef
+        { name: 'mahdco', lat: 35.5045, lng: 11.0602, region: 'Sahel' }, // Mahdia
+        { name: 'starlette', lat: 35.6785, lng: 10.8838, region: 'Sahel' }, // Sayada
+        { name: 'trc', lat: 35.6315, lng: 10.8938, region: 'Sahel' },
+    ];
+
+        // Main platforms always visible with red markers
+        const mainPlatforms = [
+            { name: 'Benetton Sahel', lat: 35.7787, lng: 10.6811, region: 'sahel' }, // Coordinates for Sahel
+            { name: 'Benetton Gafsa', lat: 34.3868, lng: 8.6984, region: 'gafsa' }, // Coordinates for Gafsa
+            { name: 'Benetton Kasserine', lat: 35.1795, lng: 8.8379, region: 'kasserine' } // Coordinates for Kasserine
+        ];
+
+        let markers = [];
+
+        // Create a custom red icon for main platforms
+        const redIcon = L.icon({
+            iconUrl: 'https://img.icons8.com/ios-filled/50/ff0000/marker.png', // Use a red marker icon
+            iconSize: [35, 35], // Size of the icon
+            iconAnchor: [12, 35], // Point of the icon which will correspond to marker's location
+            popupAnchor: [1, -34] // Point from which the popup should open relative to the iconAnchor
+        });
+
+        // Create a default factory icon (You can modify this URL to change the color)
+        const factoryIcon = L.icon({
+            iconUrl: 'https://img.icons8.com/ios-filled/50/3b3bc4/marker.png', // Use a default black marker icon
+            iconSize: [20, 25],
+            iconAnchor: [12, 15],
+            popupAnchor: [1, -34]
+        });
+
+        // Function to display the main platforms with red markers
+        function showMainPlatforms() {
+            for (const platform of mainPlatforms) {
+                const marker = L.marker([platform.lat, platform.lng], { icon: redIcon })
+                    .addTo(map)
+                    .bindPopup(platform.name);
+                markers.push(marker);
+                 // Show the name on mouseover
+                 marker.on('mouseover', function() {
+                        this.openPopup();
+                    });
+                    marker.on('mouseout', function() {
+                        this.closePopup();
+                    });
+            }
+        }
+
+        // Function to display the regular factories
+        function showFactories(region = 'all') {
+            clearMarkers();
+            showMainPlatforms(); // Always display the main platforms
+            for (const factory of factories) {
+                if (region === 'all' || factory.region === region) {
+                    const marker = L.marker([factory.lat, factory.lng], { icon: factoryIcon })
+                        .addTo(map)
+                        .bindPopup(factory.name);
+                    markers.push(marker);
+                     // Show the name on mouseover
+                     marker.on('mouseover', function() {
+                        this.openPopup();
+                    });
+                    marker.on('mouseout', function() {
+                        this.closePopup();
+                    });
+                }
+            }
+        }
+
+        function clearMarkers() {
+            for (const marker of markers) {
+                map.removeLayer(marker);
+            }
+            markers = [];
+        }
+
+        function filterFactories() {
+            const selectedRegion = document.getElementById("region").value;
+            showFactories(selectedRegion);
+        }
+
+        // Initialize with all factories and main platforms
+        showFactories('all');
+        
+    </script>
+</body>
+</html>

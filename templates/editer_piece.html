@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
+
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/apps-ecommerce-product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:45:53 GMT -->
+<head>
+
+    <meta charset="utf-8" />
+    <title>INVENTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    
+    <link href="{{ url_for('static', filename='assets/images/favicon.ico') }}" rel="shortcut icon" />
+    <!--Swiper slider css-->
+    <link href="{{ url_for('static', filename='assets/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- Layout config Js -->
+   
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+
+    <!-- Bootstrap Css -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ url_for('static', filename='assets/css/icons.min.css') }}"  rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link  href="{{ url_for('static', filename='assets/css/app.min.css') }}"  rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{{ url_for('static', filename='assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    
+
+</head>
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+       
+
+
+
+        <!-- ========== App Menu ========== -->
+        <div class="app-menu navbar-menu">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <!-- Dark Logo-->
+                <a href="index.html" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-dark.png" alt="" height="17">
+                    </span>
+                </a>
+                <!-- Light Logo-->
+                <a href="index.html" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-light.png" alt="" height="17">
+                    </span>
+                </a>
+                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+                    <i class="ri-record-circle-line"></i>
+                </button>
+            </div>
+    
+            <div class="dropdown sidebar-user m-1 rounded">
+                <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="d-flex align-items-center gap-2">
+                        <img class="rounded header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                        <span class="text-start">
+                            <span class="d-block fw-medium sidebar-user-name-text">Admin</span>
+                            <span class="d-block fs-14 sidebar-user-name-sub-text"><i class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span class="align-middle">Online</span></span>
+                        </span>
+                    </span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <h6 class="dropdown-header">Welcome Admin</h6>
+                    <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                    <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
+                    <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>
+                    <a class="dropdown-item" href="pages-faqs.html"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a>
+                    <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
+                    <a class="dropdown-item" href="auth-lockscreen-basic.html"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a>
+                    <a class="dropdown-item" href="auth-logout-basic.html"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+                </div>
+            </div>
+            
+
+            {% include 'scrollbar.html' %}
+            <div class="sidebar-background"></div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div id="layout-wrapper">
+
+ 
+                <!-- Left Sidebar End -->
+                <!-- Vertical Overlay-->
+                
+        
+                <!-- ============================================================== -->
+                <!-- Start right Content here -->
+                <!-- ============================================================== -->
+                
+        
+                    <div class="page-content">
+                        <div class="container-fluid">
+                            
+                            <!-- start page title -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                                        <h4 class="mb-sm-0">Editer Piece</h4>
+        
+                                        <div class="page-title-right">
+                                            <ol class="breadcrumb m-0">
+                                                <li class="breadcrumb-item"><a href="/">Invento</a></li>
+                                                <li class="breadcrumb-item active">Editer Piece</li>
+                                            </ol>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end page title -->
+        
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row gx-lg-5">
+                                                
+                                                <!-- end col -->
+        
+                                  
+        
+                                                <form action="{{ url_for('rechercher_piece') }}" method="POST" class="app-search d-none d-md-block">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Entrer le code piece ..." id="code_piece" name="code_piece" required>
+                                                        <span class="mdi mdi-magnify search-widget-icon"></span>
+                                                        
+                                                    </div>
+                                                
+                                                    
+                                                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                                                    
+                                                </form>
+                                                
+                                                {% if pieces_data %}
+                                                {% for piece in pieces_data %}
+                                                <form action="{{ url_for('editer_piece') }}" method="POST">
+
+                                                        <input type="hidden" name="id_piece" value="{{ piece.id_piece }}">  <!-- Code article caché -->
+
+                                                        <div class="col-xl-8 mt-4">
+                                                            <div class="d-flex">
+                                                                <div class="flex-grow-1">
+                                                                    <h4>{{ piece.libelle_piece }}</h4>
+                                                                    <div class="hstack gap-3 flex-wrap">
+                                                                        <div>Code Piece: 
+                                                                            <input type="text" class="form-control" value="{{ piece.code_piece }}" id="code_piece" name="code_piece" >
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Libelle Piece: 
+                                                                            <input type="text" class="form-control" value="{{ piece.libelle_piece }}" id="libelle_piece" name="libelle_piece" >
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Emplacement: 
+                                                                            <input type="text" class="form-control" value="{{ piece.emplacement }}" id="emplacement" name="emplacement">
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Fournisseur: 
+                                                                            <input type="text" class="form-control" value="{{ piece.fournisseur_piece }}" id="fournisseur_piece" name="fournisseur_piece">
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Quantité: 
+                                                                            <input type="number" class="form-control" value="{{ piece.quantite_piece }}" id="quantite_piece" name="quantite_piece">
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Prix: 
+                                                                            <input type="number" step="0.01" class="form-control" value="{{ piece.prix_achat_piece }}" id="prix_achat_piece" name="prix_achat_piece">
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Quantité Minimale: 
+                                                                            <input type="number" class="form-control" value="{{ piece.quantite_min_piece }}" id="quantite_min_piece" name="quantite_min_piece">
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Date de Création : 
+                                                                            <input type="text" class="form-control" value="{{ piece.date_piece }}" id="date_piece" name="date_piece">
+                                                                        </div>
+                                                                        <div class="vr"></div>
+
+                                                                        <div>Devise : 
+                                                                            <input type="text" class="form-control" value="{{ piece.devise }}" id="devise" name="devise">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-warning">Modifier</button>
+
+                                                    </form>
+
+
+                                                    <form action="{{ url_for('supprimer_piece') }}" method="POST" style="display:inline;">
+                                                        <input type="hidden" name="id_piece" value="{{ piece.id_piece }}">
+                                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                    </form>
+                                                {% endfor %}
+                                            {% else %}
+                                                <div class="alert alert-warning mt-4" role="alert">
+                                                    Aucune piece trouvé pour le code saisi.
+                                                </div>
+                                            {% endif %}
+
+                                                
+                                                <!-- end col -->
+                                            </div>
+                                            <!-- end row -->
+                                        </div>
+                                        <!-- end card body -->
+                                    </div>
+                                    <!-- end card -->
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                           
+                                            <th scope="col">Code Piece</th>
+                                            <th scope="col">Libellé Piece</th>
+                                            <th scope="col">Prix Achat</th>
+                                            <th scope="col">Devise</th>
+                                            <th scope="col">Emplacement</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Fournisseur</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Quantité Min</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for piece in pieces %}
+                                        <tr>
+                                           
+                                            <td>{{ piece.code_piece }}</td>
+                                            <td>{{ piece.libelle_piece }}</td>
+                                            <td>{{ piece.prix_achat_piece }}</td>
+                                            <td>{{ piece.devise }}</td>
+                                            <td>{{ piece.emplacement }}</td>
+                                            <td>{{ piece.quantite_piece }}</td>
+                                            <td>{{ piece.fournisseur_piece }}</td>
+                                            <td>{{ piece.date_piece.strftime('%d-%m-%Y') }}</td>
+                                            <td>{{ piece.quantite_min_piece }}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            
+                            
+                            
+                        </div>
+                        <!-- container-fluid -->
+                    </div>
+
+
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © INVENTO.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Hammouda Ahmed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+    <!--preloader-->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner-border text-primary avatar-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
+    
+    <script src="{{ url_for('static', filename='assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/feather-icons/feather.min.js') }}"></script>
+
+    <!-- App, Layout et Plugins -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+
+    <!-- ApexCharts et autres scripts dans pages -->
+    <script src="{{ url_for('static', filename='assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/dashboard-ecommerce.init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/apexcharts-line.init.js') }}"></script>
+
+</body>
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/apps-ecommerce-product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:45:54 GMT -->
+</html>

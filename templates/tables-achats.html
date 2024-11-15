@@ -1,0 +1,55 @@
+<!-- Container for the Export button and the table -->
+<div class="d-flex justify-content-end mb-2">
+    <div class="btn-group">
+        <button id="btnGroupVerticalDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Exporter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+            <a class="dropdown-item" href="#"><i class=" ri-file-excel-line"></i> Exporter en Excel</a>
+            <a class="dropdown-item" href="#"><i class=" ri-file-pdf-line"></i>Exporter en PDF</a>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                
+                <th scope="col">Lot</th>
+                <th scope="col">Code Article</th>
+                <th scope="col">Libelle Article</th>
+                <th scope="col">Prix Achat</th>
+                <th scope="col">Assignation</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Fournisseur</th>
+                <th scope="col">Date</th>               
+            </tr>
+        </thead>
+        <tbody>
+            {% for achat in achats %}
+            <tr>
+               
+                <td><a href="" class="fw-semibold">{{ achat.lot_achat }}</a></td>
+                <td><a href="" class="fw-semibold">{{ achat.code_article }}</a></td>
+                <td>{{ achat.libelle_article }}</td>
+                <td>{{ achat.prix_achat }}</td>
+                <td>{{ achat.assignation }}</td>
+                <td><a href="" class="fw-semibold">{{ achat.quantite }}</a></td>
+                <td>{{ achat.fournisseur }}</td>
+                <td>{{ achat.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="table-light">
+            <tr>
+                <td colspan="4">Prix Total</td>
+                <td>{{ achat_prix_totale }}</td>
+            </tr>
+            <tr>
+                <td colspan="6">Quantité Total</td>
+                <td>{{ achat_quantite_totale }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

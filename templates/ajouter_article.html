@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
+
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:46:58 GMT -->
+<head>
+
+    <meta charset="utf-8" />
+    <title>INVENTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/favicon.ico') }}">
+
+    <!-- Layout config Js -->
+    
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    <!-- Bootstrap Css -->
+    
+    <!-- Icons Css -->
+   
+    <link href="{{ url_for('static', filename='assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+   
+    <link href="{{ url_for('static', filename='assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+   
+    <link href="{{ url_for('static', filename='assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+
+    
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <header id="page-topbar">
+    <div class="layout-width">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box horizontal-logo">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-dark.png" alt="" height="17">
+                        </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-light.png" alt="" height="17">
+                        </span>
+                    </a>
+                </div>
+
+                <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger material-shadow-none" id="topnav-hamburger-icon">
+                    <span class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </button>
+                <script>
+                    
+                </script>
+
+                <!-- App Search-->
+              
+            </div>
+
+            <div class="d-flex align-items-center">
+
+                
+
+                
+                
+
+               
+
+                <div class="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
+                    <button type="button" class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                        <i class='bx bx-bell fs-22'></i>
+                        <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{{ notification_count_quantite }}<span class="visually-hidden">Notifications</span></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+
+                        <div class="dropdown-head bg-primary bg-pattern rounded-top">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0 fs-16 fw-semibold text-white"> Notifications 🔔</h6>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="px-2 pt-2">
+                                <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true" id="notificationItemsTab" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab" role="tab" aria-selected="true">
+                                            All 
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#messages-tab" role="tab" aria-selected="false">
+                                            Messages
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab" role="tab" aria-selected="false">
+                                            Alerts
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-content position-relative" id="notificationItemsTabContent">
+                            <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
+                                <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                        <div class="d-flex">
+                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                    <i class="bx bx-badge-check"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-2 lh-base">Your <b>Elite</b> author Graphic
+                                                        Optimization <span class="text-secondary">reward</span> is
+                                                        ready!
+                                                    </h6>
+                                                </a>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> Just 30 sec ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="all-notification-check01">
+                                                    <label class="form-check-label" for="all-notification-check01"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                        <div class="d-flex">
+                                            <img src="assets/images/users/avatar-2.jpg" class="me-3 rounded-circle avatar-xs flex-shrink-0" alt="user-pic">
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
+                                                </a>
+                                                <div class="fs-13 text-muted">
+                                                    <p class="mb-1">Answered to your comment on the cash flow forecast's
+                                                        graph .</p>
+                                                </div>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 48 min ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="all-notification-check02">
+                                                    <label class="form-check-label" for="all-notification-check02"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                        <div class="d-flex">
+                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
+                                                    <i class='bx bx-message-square-dots'></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-2 fs-13 lh-base">You have received <b class="text-success">20</b> new messages in the conversation
+                                                    </h6>
+                                                </a>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 2 hrs ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="all-notification-check03">
+                                                    <label class="form-check-label" for="all-notification-check03"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                        <div class="d-flex">
+                                            <img src="assets/images/users/avatar-8.jpg" class="me-3 rounded-circle avatar-xs flex-shrink-0" alt="user-pic">
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
+                                                </a>
+                                                <div class="fs-13 text-muted">
+                                                    <p class="mb-1">We talked about a project on linkedin.</p>
+                                                </div>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 4 hrs ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="all-notification-check04">
+                                                    <label class="form-check-label" for="all-notification-check04"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="my-3 text-center view-all">
+                                        <button type="button" class="btn btn-soft-success waves-effect waves-light">View
+                                            All Notifications <i class="ri-arrow-right-line align-middle"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel" aria-labelledby="messages-tab">
+                                <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                    <div class="text-reset notification-item d-block dropdown-item">
+                                        <div class="d-flex">
+                                            <img src="assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6>
+                                                </a>
+                                                <div class="fs-13 text-muted">
+                                                    <p class="mb-1">We talked about a project on linkedin.</p>
+                                                </div>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 30 min ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="messages-notification-check01">
+                                                    <label class="form-check-label" for="messages-notification-check01"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-reset notification-item d-block dropdown-item">
+                                        <div class="d-flex">
+                                            <img src="assets/images/users/avatar-2.jpg" class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
+                                                </a>
+                                                <div class="fs-13 text-muted">
+                                                    <p class="mb-1">Answered to your comment on the cash flow forecast's
+                                                        graph 🔔.</p>
+                                                </div>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 2 hrs ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="messages-notification-check02">
+                                                    <label class="form-check-label" for="messages-notification-check02"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-reset notification-item d-block dropdown-item">
+                                        <div class="d-flex">
+                                            <img src="assets/images/users/avatar-6.jpg" class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6>
+                                                </a>
+                                                <div class="fs-13 text-muted">
+                                                    <p class="mb-1">Mentionned you in his comment on 📃 invoice #12501.
+                                                    </p>
+                                                </div>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 10 hrs ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="messages-notification-check03">
+                                                    <label class="form-check-label" for="messages-notification-check03"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-reset notification-item d-block dropdown-item">
+                                        <div class="d-flex">
+                                            <img src="assets/images/users/avatar-8.jpg" class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
+                                                </a>
+                                                <div class="fs-13 text-muted">
+                                                    <p class="mb-1">We talked about a project on linkedin.</p>
+                                                </div>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> 3 days ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="messages-notification-check04">
+                                                    <label class="form-check-label" for="messages-notification-check04"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="my-3 text-center view-all">
+                                        <button type="button" class="btn btn-soft-success waves-effect waves-light">View
+                                            All Messages <i class="ri-arrow-right-line align-middle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab"></div>
+
+                            <div class="notification-actions" id="notification-actions">
+                                <div class="d-flex text-muted justify-content-center">
+                                    Select <div id="select-content" class="text-body fw-semibold px-1">0</div> Result <button type="button" class="btn btn-link link-danger p-0 ms-3" data-bs-toggle="modal" data-bs-target="#removeNotificationModal">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+
+        <!-- ========== App Menu ========== -->
+        <div class="app-menu navbar-menu">
+           
+            
+            
+
+            {% include 'scrollbar.html' %}
+
+            <div class="sidebar-background"></div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+    <div class="auth-page-wrapper pt-5">
+        <!-- auth page bg -->
+        <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
+            <div class="bg-overlay"></div>
+
+            <div class="shape">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
+                    <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- auth page content -->
+        <div class="auth-page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mt-sm-5 mb-4 text-white-50">
+                            <div>
+                                
+                            </div>
+                            <p href="/index" class="mt-3 fs-15 fw-medium"><h1 style="color: aliceblue;">INVENTO</h1></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card mt-4 card-bg-fill">
+
+                            <div class="card-body p-4">
+                                <div class="text-center mt-2">
+                                    <h5 class="text-primary">Ajouter Article</h5>
+                                    
+                                </div>
+                                <div class="p-2 mt-4">
+                                    <form action="{{ url_for('ajouter_article') }}" method="POST">
+
+                                                    <!-- Section pour le code article -->
+                                        <div class="mb-3">
+                                            <label for="code_article" class="form-label">Code Article :</label>
+
+                                            <!-- Liste des codes articles existants -->
+                                            <select id="code_article_list" class="form-control">
+                                                <option value="" disabled selected>Code Article Existant :</option>
+                                                {% for article in articles %}
+                                                    <option value="{{ article.code_article }}">{{ article.code_article }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                            <!-- Champ de texte pour entrer manuellement le code article -->
+                                            <input type="text" id="code_article_input" name="code_article" class="form-control mt-2" placeholder="Entrer le code article manuellement" required>
+                                            <small id="validation_message_code_article" class="form-text"></small>
+                                        </div>
+
+                                        <!-- Section pour le libellé article -->
+                                        <div class="mb-3">
+                                            <label for="libelle_article" class="form-label">Libellé Article :</label>
+
+                                            <!-- Liste des libellés articles existants -->
+                                            <select id="libelle_article_list" class="form-control">
+                                                <option value="" disabled selected>Libellé Article Existant :</option>
+                                                {% for article in articles %}
+                                                    <option value="{{ article.libelle_article }}">{{ article.libelle_article }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                            <!-- Champ de texte pour entrer manuellement le libellé article -->
+                                            <input type="text" id="libelle_article_input" name="libelle_article" class="form-control mt-2" placeholder="Entrer le libellé article manuellement" required>
+                                            <small id="validation_message_libelle_article" class="form-text"></small>
+                                        </div>
+
+                                        <script>
+                                            // Validation pour le code article
+                                            const codeArticleList = document.getElementById('code_article_list');
+                                            const codeArticleInput = document.getElementById('code_article_input');
+                                            const validationMessageCodeArticle = document.getElementById('validation_message_code_article');
+                                        
+                                            function validateCodeArticle() {
+                                                const inputValue = codeArticleInput.value.trim();
+                                                const options = Array.from(codeArticleList.options).map(option => option.value);
+                                        
+                                                if (options.includes(inputValue)) {
+                                                    codeArticleInput.classList.remove('is-valid');
+                                                    codeArticleInput.classList.add('is-invalid');
+                                                    validationMessageCodeArticle.textContent = "Le code article existe.";
+                                                    validationMessageCodeArticle.style.color = "red";
+                                                } else {
+                                                    codeArticleInput.classList.remove('is-invalid');
+                                                    codeArticleInput.classList.add('is-valid');
+                                                    validationMessageCodeArticle.textContent = "Le code article est valide.";
+                                                    validationMessageCodeArticle.style.color = "green";
+                                                }
+                                            }
+                                        
+                                            // Validation pour le libellé article
+                                            const libelleArticleList = document.getElementById('libelle_article_list');
+                                            const libelleArticleInput = document.getElementById('libelle_article_input');
+                                            const validationMessageLibelleArticle = document.getElementById('validation_message_libelle_article');
+                                        
+                                            function validateLibelleArticle() {
+                                                const inputValue = libelleArticleInput.value.trim();
+                                                const options = Array.from(libelleArticleList.options).map(option => option.value);
+                                        
+                                                if (options.includes(inputValue)) {
+                                                    libelleArticleInput.classList.remove('is-valid');
+                                                    libelleArticleInput.classList.add('is-invalid');
+                                                    validationMessageLibelleArticle.textContent = "Le libellé article existe.";
+                                                    validationMessageLibelleArticle.style.color = "red";
+                                                } else {
+                                                    libelleArticleInput.classList.remove('is-invalid');
+                                                    libelleArticleInput.classList.add('is-valid');
+                                                    validationMessageLibelleArticle.textContent = "Le libellé article est valide.";
+                                                    validationMessageLibelleArticle.style.color = "green";
+                                                }
+                                            }
+                                        
+                                            // Ajouter des écouteurs d'événements pour les deux inputs
+                                            codeArticleInput.addEventListener('input', validateCodeArticle);
+                                            libelleArticleInput.addEventListener('input', validateLibelleArticle);
+                                        </script>
+                                        
+                                                                                                                                            
+
+                                        
+
+                                        <div class="mb-3">
+                                            <label for="prix_achat" class="form-label">Prix Achat</label>
+                                            <input type="text" name="prix_achat" class="form-control" id="prix_achat" placeholder="Enter prix d'achat" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Devise  :</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="devis" id="devisTND" value="TND" required>
+                                                <label class="form-check-label" for="devisTND">TND</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="devis" id="devisEuro" value="Euro">
+                                                <label class="form-check-label" for="devisEuro">Euro</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="devis" id="devisDollar" value="Dollar">
+                                                <label class="form-check-label" for="devisDollar">Dollar</label>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="mb-3">
+                                            <label class="form-label">Assignation :</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="assignation" id="assignationSahel" value="MAG SAHEL" required>
+                                                <label class="form-check-label" for="assignationSahel">MAG SAHEL</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="assignation" id="assignationGafsa" value="MAG GAFSA">
+                                                <label class="form-check-label" for="assignationGafsa">MAG GAFSA</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="assignation" id="assignationKasserine" value="MAG KASSERINE">
+                                                <label class="form-check-label" for="assignationKasserine">MAG KASSERINE</label>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div class="mb-3">
+                                            <label for="quantite" class="form-label">Quantite</label>
+                                            <input type="text" name="quantite" class="form-control" id="quantite" placeholder="Enter quantite" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="fournisseur" class="form-label">Fournisseur</label>
+                                            
+                                            <!-- Case à cocher pour saisir manuellement -->
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="manualInputCheck">
+                                                <label class="form-check-label" for="manualInputCheck">
+                                                    Saisir manuellement
+                                                </label>
+                                            </div>
+                                        
+                                            <!-- Input pour saisir un fournisseur manuellement -->
+                                            <input type="text" name="fournisseur" class="form-control" id="manualFournisseur" placeholder="Enter fournisseur manuellement" disabled>
+                                        
+                                            <!-- Liste déroulante pour choisir un fournisseur -->
+                                            <select name="fournisseur" id="selectFournisseur" class="form-control" required>
+                                                <option value="" disabled selected>Choisir un fournisseur</option>
+                                                {% for fournisseur in fournisseurs %}
+                                                    <option value="{{ fournisseur.nom_fournisseur }}">{{ fournisseur.nom_fournisseur }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            
+                                            <!-- Message d'erreur s'affiche si la case n'est pas cochée et l'utilisateur commence à saisir -->
+                                            <small id="manualInputWarning" class="text-danger" style="display: none;">Pour valider votre saisie, cochez la case.</small>
+                                        </div>
+                                        
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+    const manualInputCheck = document.getElementById('manualInputCheck');
+    const manualFournisseur = document.getElementById('manualFournisseur');
+    const selectFournisseur = document.getElementById('selectFournisseur');
+    const manualInputWarning = document.getElementById('manualInputWarning');
+    
+    // Fonction pour activer/désactiver l'input manuel en fonction de la case à cocher
+    manualInputCheck.addEventListener('change', function () {
+        if (manualInputCheck.checked) {
+            manualFournisseur.disabled = false;
+            selectFournisseur.disabled = true;
+            selectFournisseur.value = ''; // Réinitialiser la sélection
+        } else {
+            manualFournisseur.disabled = true;
+            selectFournisseur.disabled = false;
+            manualFournisseur.value = ''; // Réinitialiser la saisie manuelle
+        }
+    });
+
+    // Vérifier si l'utilisateur commence à saisir manuellement
+    manualFournisseur.addEventListener('input', function () {
+        if (!manualInputCheck.checked) {
+            manualInputWarning.style.display = 'inline'; // Afficher le message
+        } else {
+            manualInputWarning.style.display = 'none'; // Cacher le message
+        }
+    });
+
+    // Lorsque l'utilisateur choisit un fournisseur dans la liste
+    selectFournisseur.addEventListener('change', function () {
+        manualFournisseur.value = selectFournisseur.value; // Mettre à jour la valeur de l'input manuel
+        manualInputWarning.style.display = 'none'; // Cacher le message d'avertissement
+    });
+
+    // Si la page se charge avec un fournisseur sélectionné, cacher le message
+    if (selectFournisseur.value !== '') {
+        manualInputWarning.style.display = 'none';
+    }
+});
+
+                                        </script>
+
+                                        <div class="mb-3">
+                                            <label for="quantite_min" class="form-label">Quantite min </label>
+                                            <input type="text" name="quantite_min" class="form-control" id="quantite_min" placeholder="Enter quantite min " >
+                                        </div>
+
+                                        
+
+                                        <div class="mt-4">
+                                            <button class="btn btn-success w-100" type="submit">Ajouter</button>
+                                        </div>
+
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+
+                        
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end auth page content -->
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <p class="mb-0 text-muted">&copy;
+                                <script>document.write(new Date().getFullYear())</script> INVENTO. Crafted with <i class="mdi mdi-heart text-danger"></i> by HAMMOUDA Ahmed Mustapha
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+    </div>
+    <!-- end auth-page-wrapper -->
+
+    <script src="{{ url_for('static', filename='assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/feather-icons/feather.min.js') }}"></script>
+
+    <!-- App, Layout et Plugins -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+
+    <!-- ApexCharts et autres scripts dans pages -->
+    <script src="{{ url_for('static', filename='assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/dashboard-ecommerce.init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/apexcharts-line.init.js') }}"></script>
+</body>
+
+
+</html>
