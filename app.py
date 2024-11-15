@@ -8,7 +8,11 @@ from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 
+<<<<<<< HEAD
 app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+mysqlconnector://avnadmin:AVNS_C96xtkYSwqY0qMlZ2aS@mysql-2ef51fa8-hammouda-9afc.h.aivencloud.com:19722/invento')
+=======
+app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+mysqlconnector://root:root@localhost:3306/invento')
+>>>>>>> 30b4eda (1.0)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'invento_clé_secrète'
 # Initialize SQLAlchemy with the app
@@ -83,6 +87,140 @@ def logout():
         session.clear()  # Efface la session pour déconnecter l'utilisateur
         return redirect(url_for('login'))
 
+<<<<<<< HEAD
+=======
+@app.route('/ajouter_piece', methods=["GET", "POST"])
+def ajouter_piece():
+    pieces = Piece.query.all()
+    if request.method == 'POST':
+        try:
+            code_piece = request.form.get('code_piece')
+            libelle_piece = request.form.get('libelle_piece')
+            prix_achat_piece=request.form.get('prix_achat')
+            emplacement=request.form.get('assignation')
+            quantite_piece=request.form.get('quantite')
+            fournisseur_piece=request.form.get('fournisseur')
+            quantite_min_piece=request.form.get('quantite_min')
+            devise=request.form.get('devise')
+            print(code_piece,libelle_piece,prix_achat_piece,emplacement,quantite_min_piece,fournisseur_piece,quantite_piece,devise)
+            # Vérifier si le code_piece ou libelle_piece existe déjà
+            piece_existante = Piece.query.filter_by(code_piece = code_piece, libelle_piece = libelle_piece).first()
+
+            if piece_existante:
+                message = "Erreur : Le code ou libelle pièce existe déjà."
+                return f"""<script>alert("{message}");</script>"""
+
+            # Ajouter la nouvelle pièce
+            new_piece = Piece(
+                code_piece=code_piece,
+                libelle_piece=libelle_piece,
+                prix_achat_piece=prix_achat_piece,
+                emplacement=emplacement,
+                quantite_piece=quantite_piece,
+                fournisseur_piece=fournisseur_piece,
+                quantite_min_piece=quantite_min_piece,
+                devise=devise,
+                date_piece=datetime.now(timezone.utc)
+            )
+
+            db.session.add(new_piece)
+            db.session.commit()
+            message = "Pièce ajoutée avec succès."
+            return f"""<script>alert("{message}");</script>"""
+
+        except Exception as e:
+            db.session.rollback()
+            print(f"Erreur : {e}")
+            return f"""<script>alert("Erreur : {e}");</script>"""
+
+    return render_template('ajouter_piece.html', pieces=pieces)
+
+
+
+@app.route('/rechercher_details_piece', methods=['GET', 'POST'])
+@roles_required('admin')
+def rechercher_details_piece():
+    pieces = Piece.query.all()
+    if request.method == 'POST':
+        code_piece = request.form.get("code_piece")       
+        pieces_data = Piece.query.filter_by(code_piece=code_piece).all()
+    return render_template('details_piece.html', pieces=pieces, pieces_data=pieces_data)
+
+
+
+@app.route('/details_piece', methods=['GET', 'POST'])
+@roles_required('admin')
+def details_piece():
+    pieces = Piece.query.all()
+    return render_template('details_piece.html', pieces=pieces)
+
+# Route pour rechercher une pièce
+@app.route('/rechercher_piece', methods=['GET', 'POST'])
+@roles_required('admin')
+def rechercher_piece():
+    pieces = Piece.query.all()
+    pieces_data = []
+    if request.method == 'POST':
+        code_piece = request.form.get("code_piece")       
+        pieces_data = Piece.query.filter_by(code_piece=code_piece).all()
+    return render_template('editer_piece.html', pieces=pieces, pieces_data=pieces_data)
+
+# Route pour modifier une pièce
+@app.route('/editer_piece', methods=['POST','GET'])
+@roles_required('admin')
+def editer_piece():
+    pieces=Piece.query.all()
+    if request.method == 'POST':
+        code_piece = request.form.get('code_piece')
+        libelle_piece = request.form.get('libelle_piece')
+        emplacement = request.form.get('emplacement')
+        fournisseur_piece = request.form.get('fournisseur_piece')
+        quantite_piece = request.form.get('quantite_piece')
+        prix_achat_piece = request.form.get('prix_achat_piece')
+        quantite_min_piece = request.form.get('quantite_min_piece')
+        devise = request.form.get('devise')
+
+        # Rechercher la pièce par son code
+        piece = Piece.query.filter_by(code_piece=code_piece).first()
+
+        if piece:
+            # Mise à jour des informations
+            piece.libelle_piece = libelle_piece
+            piece.emplacement = emplacement
+            piece.fournisseur_piece = fournisseur_piece
+            piece.quantite_piece = quantite_piece
+            piece.prix_achat_piece = prix_achat_piece
+            piece.quantite_min_piece = quantite_min_piece
+            piece.devise = devise
+
+            db.session.commit()
+            flash("Pièce modifiée avec succès", "success")
+            return render_template('editer_piece.html', pieces=pieces)
+        else:
+            flash("Pièce introuvable", "danger")
+            return render_template('editer_piece.html', pieces=pieces)
+    else:
+        return render_template('editer_piece.html', pieces=pieces)
+
+# Route pour supprimer une pièce
+@app.route('/supprimer_piece', methods=['POST'])
+@roles_required('admin')
+def supprimer_piece():
+    id_piece = request.form.get('id_piece')
+    piece = Piece.query.filter_by(id_piece=id_piece).first()
+
+    if piece:
+        db.session.delete(piece)
+        db.session.commit()
+        flash("Pièce supprimée avec succès", "success")
+    else:
+        flash("Pièce introuvable", "danger")
+
+    return redirect(url_for('rechercher_piece'))
+
+
+
+>>>>>>> 30b4eda (1.0)
 # Route pour la page d'administration
 @app.route('/admin')
 @roles_required('admin')
@@ -838,12 +976,15 @@ def ajouter_demande_achat():
             return render_template('ajouter_demande_achat.html')
      
 
+<<<<<<< HEAD
 
     
 
 
     # routes.py
 
+=======
+>>>>>>> 30b4eda (1.0)
 @app.route('/rechercher_demande_achat', methods=['GET', 'POST'])
 @roles_required('admin')
 def rechercher_demande_achat():
@@ -1596,6 +1737,23 @@ class Article(db.Model):
     quantite_min = db.Column(db.Integer, nullable=False)
     image=db.Column(db.String(255),nullable=True)
 
+<<<<<<< HEAD
+=======
+# Piece Model
+class Piece(db.Model):
+    __tablename__ = 'piece'
+    id_piece = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    code_piece = db.Column(db.String(20), nullable=False, unique=True, index=True)
+    libelle_piece = db.Column(db.String(255), nullable=False)
+    prix_achat_piece = db.Column(db.Float, nullable=False)
+    emplacement = db.Column(db.String(255), nullable=False, index=True)
+    quantite_piece = db.Column(db.Integer, nullable=False)
+    fournisseur_piece = db.Column(db.String(255), nullable=False)
+    date_piece = db.Column(db.DateTime, default=datetime.now(timezone.utc), nullable=False)
+    quantite_min_piece = db.Column(db.Integer, nullable=False)
+    devise=db.Column(db.String(20),nullable=True)
+
+>>>>>>> 30b4eda (1.0)
 # Supplier Model (Fournisseur)
 class Fournisseur(db.Model):
     __tablename__ = 'fournisseur'
