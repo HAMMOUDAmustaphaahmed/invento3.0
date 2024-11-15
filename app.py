@@ -220,7 +220,6 @@ def supprimer_piece():
 
 
 
->>>>>>> 30b4eda (1.0)
 # Route pour la page d'administration
 @app.route('/admin')
 @roles_required('admin')
