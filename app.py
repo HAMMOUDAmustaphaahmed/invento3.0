@@ -216,6 +216,35 @@ def supprimer_piece():
 
 
 
+@app.route('/demande_consommation', methods=["GET", "POST"])
+def demande_consommation():
+    articles = Article.query.all()
+    consommations_data=Consommation_Interne.query.all()
+    
+    if request.method == 'POST':
+        libelle_article = request.form.get('libelle_article')
+        code_article = request.form.get('code_article')
+        demandeur = request.form.get('demandeur')
+        assignation = request.form.get('assignation')
+        quantite = request.form.get('quantite')
+
+        
+        consommation = Consommation_Interne(
+            code_article=code_article,
+            libelle_article=libelle_article,
+            demandeur=demandeur,
+            assignation=assignation,
+            quantite_consommation_interne=quantite
+
+        )
+        db.session.add(consommation)
+        db.session.commit()
+
+    return render_template('demande_consommation.html', articles=articles,consommations_data=consommations_data)
+
+
+
+
 
 @app.route('/admin')
 @roles_required('admin')
@@ -1844,8 +1873,29 @@ class Usine(db.Model):
     longitude = db.Column(db.String(20), nullable=True)
     telephone = db.Column(db.String(20), nullable=True)
     etat = db.Column(db.String(20), nullable=False)  
-    
 
+# Factory Model (Usine)
+class Consommation_Interne(db.Model):
+    __tablename__ = 'consommation_interne'
+    id_consommation_interne = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    code_article = db.Column(db.String(20), nullable=False)
+    libelle_article = db.Column(db.String(20), nullable=False)
+    demandeur = db.Column(db.String(20), nullable=False)
+    assignation = db.Column(db.String(20), nullable=False)
+    date_consommation_interne = db.Column(db.DateTime, default=db.func.current_timestamp())
+    quantite_consommation_interne= db.Column(db.Integer, nullable=False)
+
+
+
+# Factory Model (Usine)
+class Machine(db.Model):
+    __tablename__ = 'machine'
+    id_machine = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nom_machine = db.Column(db.String(20), nullable=False)
+    service = db.Column(db.String(20), nullable=False)
+    etat = db.Column(db.String(20), nullable=False)
+    incident = db.Column(db.String(20), nullable=True)
+    date_incident = db.Column(db.Date, nullable=True, default=None)
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0', debug=True)
