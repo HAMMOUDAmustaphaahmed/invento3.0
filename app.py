@@ -9,11 +9,7 @@ from werkzeug.security import check_password_hash
 app = Flask(__name__)
 
 
-<<<<<<< HEAD
-app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+mysqlconnector://root:@localhost:3306/invento')
-=======
 app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+mysqlconnector://root:root@localhost:3306/invento')
->>>>>>> 20c5bc91f35f8bce13d72cf41a59697328615092
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'invento_clé_secrète'
 # Initialize SQLAlchemy with the app
