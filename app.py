@@ -215,12 +215,11 @@ def supprimer_piece():
     return redirect(url_for('rechercher_piece'))
 
 
-
 @app.route('/demande_consommation', methods=["GET", "POST"])
 def demande_consommation():
     articles = Article.query.all()
-    consommations_data=Consommation_Interne.query.all()
-    
+    consommations_data = Consommation_Interne.query.all()
+
     if request.method == 'POST':
         libelle_article = request.form.get('libelle_article')
         code_article = request.form.get('code_article')
@@ -228,21 +227,34 @@ def demande_consommation():
         assignation = request.form.get('assignation')
         quantite = request.form.get('quantite')
 
-        
+        # Débogage : affichez les données reçues
+        print(f"libelle_article: {libelle_article}")
+        print(f"code_article: {code_article}")
+        print(f"demandeur: {demandeur}")
+        print(f"assignation: {assignation}")
+        print(f"quantite: {quantite}")
+
+        # Vérifiez que tous les champs sont remplis
+        if not all([libelle_article, code_article, demandeur, assignation, quantite]):
+            return render_template('demande_consommation.html', articles=articles, consommations_data=consommations_data, error="Tous les champs sont requis")
+
+        # Créez une nouvelle consommation
         consommation = Consommation_Interne(
             code_article=code_article,
             libelle_article=libelle_article,
             demandeur=demandeur,
             assignation=assignation,
             quantite_consommation_interne=quantite
-
         )
+
+        # Ajoutez la consommation à la session et validez
         db.session.add(consommation)
         db.session.commit()
 
-    return render_template('demande_consommation.html', articles=articles,consommations_data=consommations_data)
+        # Redirigez après la soumission pour vider les champs
+        return render_template('demande_consommation.html', articles=articles, consommations_data=consommations_data, success="Demande ajoutée avec succès", selected_article=None)
 
-
+    return render_template('demande_consommation.html', articles=articles, consommations_data=consommations_data)
 
 
 
@@ -526,21 +538,24 @@ def details_article():
 @app.route('/supprimer_vente', methods=['POST'])
 @roles_required('admin')
 def supprimer_vente():
-    code_demande = request.form.get('code_demande')
-
+    id_vente = request.form.get('id_vente')
+    print(id_vente)
     # Rechercher la vente dans la base de données
-    vente = DemandeVente.query.filter_by(code_demande=code_demande).first()
+    vente = Vente.query.filter_by(id_vente=id_vente).first()
 
     if vente:
         try:
             # Supprimer la vente de la base de données
             db.session.delete(vente)
             db.session.commit()
+            print('vente supprimée')
             flash('La vente a été supprimée avec succès.', 'success')
         except Exception as e:
             db.session.rollback()
+            print('erreur')
             flash(f'Erreur lors de la suppression : {str(e)}', 'danger')
     else:
+        print('introuvable')
         flash('Vente introuvable.', 'danger')
 
     return redirect(url_for('ventes'))

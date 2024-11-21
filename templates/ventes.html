@@ -196,7 +196,7 @@
                                             <td>{{ vente.date.strftime('%d-%m-%Y') }}</td>
                                             <td>
                                                 <form action="{{ url_for('supprimer_vente') }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette vente ?');">
-                                                    <input type="hidden" name="code_demande" value="{{ vente.code_demande }}">
+                                                    <input type="hidden" name="id_vente" value="{{ vente.id_vente }}">
                                                     <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                                                 </form>
                                             </td>

@@ -151,13 +151,15 @@
                                                 
                                                 <form action="{{ url_for('demande_consommation') }}" method="POST">
                                                     <div class="col-xl-8 mt-4">
-                                                        <div class="d-flex flex-column">  <!-- Flexbox pour un alignement vertical -->
+                                                        <div class="d-flex flex-column">
+                                                            <!-- Libelle Article -->
                                                             <div class="mb-3">
                                                                 <label for="libelle_article" class="form-label">Libelle Article:</label>
                                                                 <select class="form-control" id="libelle_article" name="libelle_article" required>
                                                                     <option value="" disabled selected>Choisir un libellé</option>
                                                                     {% for item in articles %}
-                                                                        <option value="{{ item.libelle_article }}" data-code="{{ item.code_article }}">
+                                                                        <option value="{{ item.libelle_article }}" data-code="{{ item.code_article }}"
+                                                                            {% if selected_article == item.libelle_article %} selected {% endif %}>
                                                                             {{ item.libelle_article }}
                                                                         </option>
                                                                     {% endfor %}
@@ -165,8 +167,9 @@
                                                             </div>
                                                 
                                                             <!-- Champ caché pour le code_article -->
-                                                            <input type="hidden" id="code_article" name="code_article" value="">
+                                                            <input type="hidden" id="code_article" name="code_article" value="{{ selected_article_code or '' }}">
                                                 
+                                                            <!-- Demandeur -->
                                                             <div class="mb-3">
                                                                 <label class="form-label">Demandeur :</label>
                                                                 <div class="form-check form-check-inline">
@@ -191,6 +194,7 @@
                                                                 </div>
                                                             </div>
                                                 
+                                                            <!-- Assignation -->
                                                             <div class="mb-3">
                                                                 <label class="form-label">Assignation :</label>
                                                                 <div class="form-check form-check-inline">
@@ -207,11 +211,13 @@
                                                                 </div>
                                                             </div>
                                                 
+                                                            <!-- Quantité -->
                                                             <div class="mb-3">
                                                                 <label for="quantite" class="form-label">Quantité :</label>
                                                                 <input type="number" class="form-control" id="quantite" name="quantite" required>
                                                             </div>
                                                 
+                                                            <!-- Bouton Soumettre -->
                                                             <div class="mt-4">
                                                                 <button class="btn btn-success w-100" type="submit" name="action" value="ajouter">Ajouter</button>
                                                             </div>
@@ -220,7 +226,6 @@
                                                 </form>
                                                 
                                                 <script>
-                                                    // Lorsque l'utilisateur choisit un libellé, le code_article correspondant est mis à jour
                                                     document.getElementById('libelle_article').addEventListener('change', function() {
                                                         var selectedOption = this.options[this.selectedIndex];
                                                         var correspondingCode = selectedOption.getAttribute('data-code');
@@ -229,19 +234,7 @@
                                                 </script>
                                                 
                                                 
-                                                <script>
-                                                    // Lorsque l'utilisateur choisit un libellé, le code_article correspondant est mis à jour
-                                                    document.getElementById('libelle_article').addEventListener('change', function() {
-                                                        // Récupérer l'option sélectionnée
-                                                        var selectedOption = this.options[this.selectedIndex];
                                                 
-                                                        // Récupérer le code_article associé à cette option
-                                                        var correspondingCode = selectedOption.getAttribute('data-code');
-                                                
-                                                        // Mettre à jour le champ caché "code_article"
-                                                        document.getElementById('code_article').value = correspondingCode;
-                                                    });
-                                                </script>
                                                 
                                                         <div class="flex-shrink-0"></div>
                                                 <!-- end col -->
